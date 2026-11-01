@@ -1,0 +1,308 @@
+/*
+  Одяг — design tokens.
+  Monochrome like a fitting room: asphalt for the dark acts, concrete for the shop floor,
+  chalk for paper and cards. One accent only, "thread" indigo, used where stitching would be:
+  focus rings, stitch lines, the active swatch.
+*/
+:root {
+  --asphalt: #1d1e20;
+  --asphalt-2: #26272a;
+  --concrete: #e3e3df;
+  --chalk: #f6f6f3;
+  --black: #000;
+  --smoke: #77787b;
+  --smoke-light: #a9aaa7;
+  --thread: #3346ff;
+  --line: rgb(0 0 0 / 0.12);
+  --line-dark: rgb(255 255 255 / 0.14);
+  --sale: #c2412d;
+
+  --font-display: var(--font-unbounded), "Arial Black", sans-serif;
+  --font-body: var(--font-onest), "Segoe UI", sans-serif;
+
+  /* Type scale (minor third on 16px), display steps jump for posters. */
+  --t-xs: 0.75rem;
+  --t-sm: 0.875rem;
+  --t-md: 1rem;
+  --t-lg: 1.25rem;
+  --t-xl: clamp(1.5rem, 2.4vw, 2rem);
+  --t-2xl: clamp(2rem, 4.4vw, 3.6rem);
+  --t-3xl: clamp(2.6rem, 7.2vw, 6.4rem);
+
+  --gutter: clamp(1rem, 3.4vw, 3rem);
+  --max: 1440px;
+  --radius-card: 18px;
+  --radius-control: 4px;
+  --ease: cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scrollbar-gutter: stable;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+body {
+  margin: 0;
+  background: var(--concrete);
+  color: var(--black);
+  font-family: var(--font-body);
+  font-size: var(--t-md);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html.menu-open body {
+  overflow: hidden;
+}
+
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--thread);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--thread);
+  color: #fff;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--chalk);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+/* Buttons. Square-cornered tags, like the paper tag on a new garment. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  min-height: 48px;
+  padding: 0.75rem 1.4rem;
+  border: 1px solid currentColor;
+  border-radius: var(--radius-control);
+  background: transparent;
+  font-size: var(--t-sm);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition:
+    background-color 0.25s var(--ease),
+    color 0.25s var(--ease),
+    border-color 0.25s var(--ease);
+}
+
+.btn svg {
+  flex: none;
+  transition: transform 0.35s var(--ease);
+}
+
+.btn:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.btn--light {
+  background: var(--chalk);
+  border-color: var(--chalk);
+  color: var(--black);
+}
+
+.btn--light:hover {
+  background: #fff;
+}
+
+.btn--dark {
+  background: var(--black);
+  border-color: var(--black);
+  color: var(--chalk);
+}
+
+.btn--dark:hover {
+  background: var(--asphalt-2);
+}
+
+.btn--ghost:hover {
+  background: var(--black);
+  color: var(--chalk);
+  border-color: var(--black);
+}
+
+.btn--wide {
+  width: 100%;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+/* Forms */
+.field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.field label {
+  font-size: var(--t-sm);
+  font-weight: 500;
+}
+
+.input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-control);
+  background: var(--chalk);
+  font-size: var(--t-md);
+  transition: border-color 0.2s;
+}
+
+.input:hover {
+  border-color: rgb(0 0 0 / 0.3);
+}
+
+.input:focus-visible {
+  outline: none;
+  border-color: var(--thread);
+  box-shadow: 0 0 0 1px var(--thread);
+}
+
+.input[aria-invalid="true"] {
+  border-color: var(--sale);
+}
+
+textarea.input {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.field-error {
+  color: var(--sale);
+  font-size: var(--t-sm);
+}
+
+.field-hint {
+  color: var(--smoke);
+  font-size: var(--t-xs);
+}
+
+.form-message {
+  font-size: var(--t-sm);
+  color: var(--sale);
+}
+
+.form-message[data-ok="true"] {
+  color: inherit;
+}
+
+/* A dashed stitch line: the one structural device the shop uses. */
+.stitch {
+  height: 0;
+  border: 0;
+  border-top: 1.5px dashed currentColor;
+  opacity: 0.28;
+  margin: 0;
+}
+
+/* Inner pages share one frame. */
+.page {
+  min-height: 70vh;
+  padding-block: calc(var(--header-h, 76px) + clamp(2rem, 5vw, 4rem)) clamp(4rem, 8vw, 7rem);
+}
+
+.page-title {
+  font-size: var(--t-2xl);
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.muted {
+  color: var(--smoke);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

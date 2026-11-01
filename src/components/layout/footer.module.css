@@ -1,0 +1,94 @@
+.footer {
+  overflow: hidden;
+  padding-top: clamp(3rem, 6vw, 5rem);
+  background: var(--asphalt);
+  color: var(--chalk);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2.5rem;
+}
+
+.title {
+  margin-bottom: 1rem;
+  font-family: var(--font-body);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.grid ul {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--t-sm);
+  color: var(--smoke-light);
+}
+
+.grid a:hover {
+  color: var(--chalk);
+}
+
+.pay {
+  grid-template-columns: repeat(2, max-content);
+  column-gap: 1.2rem !important;
+  font-weight: 600;
+  color: var(--chalk) !important;
+}
+
+.note {
+  margin-top: 1.2rem;
+  max-width: 30ch;
+  font-size: var(--t-sm);
+  color: var(--smoke-light);
+}
+
+.legal {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  font-size: var(--t-xs);
+  color: var(--smoke-light);
+}
+
+.legal a:hover {
+  color: var(--chalk);
+}
+
+/* The name, set as large as the page allows and cut off by the bottom edge. */
+.wordmark {
+  margin: clamp(1rem, 3vw, 2rem) 0 -0.24em;
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 31vw, 30rem);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  text-align: center;
+  text-transform: uppercase;
+  color: transparent;
+  background: linear-gradient(180deg, #6d6e71 0%, #3a3b3e 70%);
+  background-clip: text;
+  user-select: none;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .legal {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,139 @@
+.card {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 1rem 1rem 1.2rem;
+  border-radius: var(--radius-card);
+  background: var(--chalk);
+  transition: background-color 0.3s var(--ease);
+}
+
+.card:hover {
+  background: #fff;
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 1;
+  margin-bottom: 1rem;
+  border-radius: calc(var(--radius-card) - 6px);
+  overflow: hidden;
+}
+
+.garment {
+  width: 100%;
+  height: 100%;
+  padding: 8%;
+  transition: transform 0.6s var(--ease);
+}
+
+.card:hover .garment {
+  transform: translateY(-2%) scale(1.03);
+}
+
+.photo {
+  object-fit: cover;
+}
+
+.badge {
+  position: absolute;
+  top: 0.25rem;
+  left: 0.25rem;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-control);
+  background: var(--chalk);
+  font-size: var(--t-xs);
+  font-weight: 500;
+}
+
+.body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.name {
+  font-family: var(--font-body);
+  font-size: var(--t-md);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* The whole card is clickable through the title link. */
+.link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.link:focus-visible {
+  outline: none;
+}
+
+.card:has(.link:focus-visible) {
+  outline: 2px solid var(--thread);
+  outline-offset: 3px;
+}
+
+.subtitle {
+  margin-top: 0.15rem;
+  font-size: var(--t-sm);
+  color: var(--smoke);
+}
+
+.go {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--black);
+  color: var(--chalk);
+  transition: transform 0.35s var(--ease);
+}
+
+.card:hover .go {
+  transform: rotate(45deg);
+}
+
+.foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.9rem;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-weight: 700;
+}
+
+.old {
+  font-size: var(--t-sm);
+  font-weight: 400;
+  color: var(--smoke);
+}
+
+.colors {
+  display: flex;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.colors li {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.15);
+}

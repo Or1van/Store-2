@@ -1,0 +1,223 @@
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin: 0 0 2rem;
+}
+
+.stats div {
+  padding: 1.1rem 1.2rem;
+  border-radius: var(--radius-card);
+  background: var(--chalk);
+}
+
+.stats dt {
+  font-size: var(--t-sm);
+  color: var(--smoke);
+}
+
+.stats dd {
+  margin: 0.3rem 0 0;
+  font-family: var(--font-display);
+  font-size: var(--t-xl);
+  font-weight: 600;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1.5px dashed var(--line);
+}
+
+.tabs a {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: var(--t-sm);
+  font-weight: 500;
+}
+
+.tabs a[aria-current="page"] {
+  background: var(--black);
+  border-color: var(--black);
+  color: var(--chalk);
+}
+
+.note {
+  max-width: 70ch;
+  margin-bottom: 1rem;
+  font-size: var(--t-sm);
+  color: var(--smoke);
+}
+
+.list {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.item {
+  border-radius: 12px;
+  background: var(--chalk);
+}
+
+.item summary {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto auto auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  font-size: var(--t-sm);
+  cursor: pointer;
+  list-style: none;
+}
+
+.item summary::-webkit-details-marker {
+  display: none;
+}
+
+.item[open] summary {
+  border-bottom: 1.5px dashed var(--line);
+}
+
+.item em {
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: var(--concrete);
+  font-style: normal;
+}
+
+.new summary {
+  grid-template-columns: 1fr;
+  padding-block: 1rem;
+}
+
+.thumb {
+  width: 44px;
+  height: 44px;
+}
+
+.itemName {
+  font-weight: 600;
+}
+
+.formWrap {
+  padding: 1.4rem 1rem 1rem;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.wide {
+  grid-column: 1 / -1;
+}
+
+.checks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  grid-column: 1 / -1;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--t-sm);
+}
+
+.check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--black);
+}
+
+.formActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  grid-column: 1 / -1;
+}
+
+.deleteForm {
+  margin-top: 1rem;
+}
+
+.delete {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--sale);
+  font-size: var(--t-sm);
+  text-decoration: underline dashed;
+  text-underline-offset: 4px;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  background: var(--chalk);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--t-sm);
+}
+
+.table th,
+.table td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.table th {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.statusForm {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.statusForm .input {
+  min-height: 38px;
+  padding-block: 0.3rem;
+  min-width: 150px;
+}
+
+.statusForm .btn {
+  min-height: 38px;
+  padding-inline: 0.8rem;
+}
+
+@media (max-width: 760px) {
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .item summary {
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+  }
+
+  .item summary > .muted {
+    display: none;
+  }
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.statusForm .input {
+  min-width: 165px;
+}

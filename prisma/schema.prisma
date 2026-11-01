@@ -1,0 +1,160 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+/// Silhouette used to draw the product when it has no photo (see src/components/product/Garment.tsx).
+enum GarmentKind {
+  TEE
+  LONGSLEEVE
+  HOODIE
+  SWEATSHIRT
+  BOMBER
+  COAT
+  PANTS
+  SHORTS
+}
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  name         String
+  passwordHash String
+  role         Role       @default(USER)
+  createdAt    DateTime   @default(now())
+  sessions     Session[]
+  cartItems    CartItem[]
+  orders       Order[]
+}
+
+/// `id` is the SHA-256 of the cookie token, so a leaked database row cannot be replayed as a cookie.
+model Session {
+  id        String   @id
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  slug      String    @unique
+  name      String
+  sortOrder Int       @default(0)
+  products  Product[]
+}
+
+model Product {
+  id           String      @id @default(cuid())
+  slug         String      @unique
+  name         String
+  /// One line under the name on cards, e.g. "Оверсайз худі з щільного футеру".
+  subtitle     String
+  description  String
+  /// Prices are kept in kopiyky (1/100 UAH).
+  priceCents   Int
+  /// Previous price, shown crossed out when set.
+  oldPriceCents Int?
+  kind         GarmentKind
+  /// Parallel arrays: colorNames[i] is the label for colorHexes[i] ("#1f2023").
+  colorNames   String[]
+  colorHexes   String[]
+  sizes        String[]
+  material     String
+  fit          String
+  care         String      @default("")
+  /// Optional photo in /public/images; without it the garment is drawn in the selected colour.
+  image        String?
+  isNew        Boolean     @default(false)
+  featured     Boolean     @default(false)
+  active       Boolean     @default(true)
+  sortOrder    Int         @default(0)
+  createdAt    DateTime    @default(now())
+  categoryId   String
+  category     Category    @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  cartItems    CartItem[]
+  orderItems   OrderItem[]
+
+  @@index([categoryId])
+}
+
+model CartItem {
+  id        String  @id @default(cuid())
+  userId    String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  size      String
+  color     String
+  quantity  Int     @default(1)
+
+  @@unique([userId, productId, size, color])
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  userId          String
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status          OrderStatus @default(PENDING)
+  totalCents      Int
+  currency        String      @default("uah")
+  fullName        String
+  phone           String
+  city            String
+  /// Nova Poshta branch or locker, free text.
+  branch          String
+  comment         String      @default("")
+  stripeSessionId String?     @unique
+  createdAt       DateTime    @default(now())
+  items           OrderItem[]
+
+  @@index([userId])
+}
+
+/// Name, size, colour and price are copied at purchase time so later product edits do not rewrite history.
+model OrderItem {
+  id        String   @id @default(cuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String?
+  product   Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  name      String
+  size      String
+  color     String
+  colorHex  String
+  kind      GarmentKind
+  unitCents Int
+  quantity  Int
+}
+
+model Subscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+/// Fixed-window counters for rate limiting, keyed like "login:ip:1.2.3.4".
+model RateLimit {
+  key     String   @id
+  count   Int
+  resetAt DateTime
+}

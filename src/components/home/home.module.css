@@ -1,0 +1,298 @@
+.bigTitle {
+  font-size: var(--t-3xl);
+  letter-spacing: -0.035em;
+}
+
+.midTitle {
+  font-size: var(--t-2xl);
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+/* New collection */
+.collection {
+  padding-block: clamp(4rem, 9vw, 8rem);
+}
+
+.collectionHead {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 2rem 3rem;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.collectionHead .bigTitle {
+  font-size: clamp(2.3rem, 5.2vw, 4.6rem);
+}
+
+.collectionText {
+  max-width: 38ch;
+  padding-top: 0.5rem;
+  color: #3d3e40;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.6vw, 1.4rem);
+}
+
+/* Fabrics */
+.fabrics {
+  padding-block: clamp(4.5rem, 10vw, 9rem);
+  background:
+    radial-gradient(50% 60% at 15% 20%, rgb(255 255 255 / 0.06), transparent 70%),
+    var(--asphalt);
+  color: var(--chalk);
+}
+
+.fabricsGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: start;
+}
+
+.fabricsHead {
+  position: sticky;
+  top: calc(var(--header-h) + 2rem);
+}
+
+.fabricsHead .bigTitle {
+  font-size: clamp(2.3rem, 5vw, 4.4rem);
+}
+
+.fabricsText {
+  max-width: 36ch;
+  margin-block: 1.6rem 2rem;
+  color: var(--smoke-light);
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.6rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.swatchCard {
+  display: grid;
+  align-content: start;
+  gap: 0.5rem;
+}
+
+/* Fabric samples with pinking-shear edges, top and bottom. */
+.swatch {
+  aspect-ratio: 3 / 4;
+  margin-bottom: 0.8rem;
+  border-radius: 2px;
+  --zig: 14px;
+  mask:
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / var(--zig) 100%,
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) 50% / var(--zig) 100%;
+  mask-composite: intersect;
+  transition: transform 0.6s var(--ease);
+}
+
+.swatchCard:hover .swatch {
+  transform: rotate(-2deg) translateY(-6px);
+}
+
+.swatch[data-texture="loop"] {
+  background:
+    radial-gradient(circle, rgb(255 255 255 / 0.22) 1.4px, transparent 2px) 0 0 / 7px 7px,
+    radial-gradient(circle, rgb(0 0 0 / 0.2) 1.4px, transparent 2px) 3.5px 3.5px / 7px 7px,
+    linear-gradient(160deg, #a2a39f, #7e7f7b);
+}
+
+.swatch[data-texture="grid"] {
+  background:
+    repeating-linear-gradient(0deg, rgb(0 0 0 / 0.28) 0 1.5px, transparent 1.5px 12px),
+    repeating-linear-gradient(90deg, rgb(0 0 0 / 0.28) 0 1.5px, transparent 1.5px 12px),
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.05) 0 1px, transparent 1px 3px),
+    linear-gradient(160deg, #6b6f52, #4f5340);
+}
+
+.swatch[data-texture="herringbone"] {
+  background:
+    linear-gradient(135deg, rgb(0 0 0 / 0.16) 25%, transparent 25%) -8px 0 / 16px 16px,
+    linear-gradient(225deg, rgb(0 0 0 / 0.16) 25%, transparent 25%) -8px 0 / 16px 16px,
+    linear-gradient(315deg, rgb(255 255 255 / 0.08) 25%, transparent 25%) 0 0 / 16px 16px,
+    linear-gradient(45deg, rgb(255 255 255 / 0.08) 25%, transparent 25%) 0 0 / 16px 16px,
+    linear-gradient(160deg, #b8946a, #94744f);
+}
+
+.swatchName {
+  font-size: var(--t-md);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.swatchText {
+  font-size: var(--t-sm);
+  color: var(--smoke-light);
+}
+
+.swatchUsed {
+  margin-top: 0.4rem;
+  padding-top: 0.7rem;
+  border-top: 1.5px dashed var(--line-dark);
+  font-size: var(--t-sm);
+}
+
+/* Categories */
+.categories {
+  padding-block: clamp(4rem, 8vw, 7rem);
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.6vw, 1.4rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.category {
+  display: grid;
+  padding: 1rem 1rem 1.2rem;
+  border-radius: var(--radius-card);
+  background: var(--chalk);
+  transition: background-color 0.3s var(--ease);
+}
+
+.category:hover {
+  background: #fff;
+}
+
+.categoryArt {
+  width: 78%;
+  margin: 0.5rem auto 1rem;
+  transition: transform 0.6s var(--ease);
+}
+
+.category:hover .categoryArt {
+  transform: translateY(-4%) rotate(-3deg);
+}
+
+.categoryName {
+  font-weight: 600;
+}
+
+.categoryCount {
+  font-size: var(--t-sm);
+  color: var(--smoke);
+}
+
+/* Newsletter */
+.newsletter {
+  padding-block: clamp(3rem, 6vw, 4.5rem);
+  border-top: 1.5px dashed var(--line);
+  background: var(--chalk);
+}
+
+.newsletterGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) auto;
+  gap: 2rem 3rem;
+  align-items: start;
+}
+
+.newsletterTitle {
+  margin-bottom: 0.6rem;
+  font-size: var(--t-xl);
+  line-height: 1.05;
+}
+
+.newsletterGrid .muted {
+  max-width: 40ch;
+  font-size: var(--t-sm);
+}
+
+.subscribe {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.subscribeRow {
+  display: flex;
+}
+
+.subscribeRow .input {
+  border-radius: var(--radius-control) 0 0 var(--radius-control);
+  background: #fff;
+}
+
+.subscribeRow .btn {
+  border-radius: 0 var(--radius-control) var(--radius-control) 0;
+  white-space: nowrap;
+}
+
+.showroom h3 {
+  margin-bottom: 0.5rem;
+  font-family: var(--font-body);
+  font-size: var(--t-md);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+@media (max-width: 1000px) {
+  .collectionHead {
+    grid-template-columns: 1fr auto;
+  }
+
+  .collectionHead .bigTitle {
+    grid-column: 1 / -1;
+  }
+
+  .fabricsGrid,
+  .newsletterGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .fabricsHead {
+    position: static;
+  }
+
+  .categoryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .collectionHead {
+    grid-template-columns: 1fr;
+  }
+
+  .swatches {
+    grid-template-columns: 1fr;
+  }
+
+  .swatchCard {
+    grid-template-columns: 110px 1fr;
+    column-gap: 1rem;
+  }
+
+  .swatch {
+    grid-row: span 3;
+    margin: 0;
+  }
+
+  .subscribeRow {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .subscribeRow .input,
+  .subscribeRow .btn {
+    border-radius: var(--radius-control);
+  }
+}
